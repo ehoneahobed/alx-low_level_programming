@@ -21,7 +21,7 @@ int main(void)
 	{
 		for (y = 49; y < 58; y++)
 		{
-			if(y > x)
+			if (y > x)
 			{
 				putchar(x);
 				putchar(y);
