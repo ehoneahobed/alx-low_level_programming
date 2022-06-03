@@ -16,7 +16,7 @@ int main(void)
 		c++;
 	}
 	
-	C = 'A';
+	char C = 'A';
 	
 	while (C <= 'Z')
 	{
