@@ -22,7 +22,6 @@ int main(void)
 		putchar(C);
 		C++;
 	}
-	
 	putchar('\n');
 	return (0);
 }
