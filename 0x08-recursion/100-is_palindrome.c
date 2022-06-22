@@ -8,6 +8,8 @@
 
 int is_palindrome(char *s)
 {
+	int get_length(char *s);
+
 	int length;
 
 	length = get_length(s) - 1;
