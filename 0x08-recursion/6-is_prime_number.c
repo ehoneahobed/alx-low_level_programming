@@ -47,7 +47,7 @@ int prime_number(int divider, int n)
 		else
 		{
 			++divider;
-			return prime_number(divider, n); 
+			return (prime_number(divider, n));
 		}
 	}
 	else
