@@ -9,11 +9,11 @@
 
 int _sqrt_recursion(int n)
 {
-	int sqrt_fun(int n,int sq);
+	int sqrt_fun(int n, int sq);
 
 	int sq = 1;
 
-	return sqrt_fun(n, sq);
+	return (sqrt_fun(n, sq));
 }
 
 /**
@@ -23,7 +23,7 @@ int _sqrt_recursion(int n)
  * Return: square root if natural square root, or -1 if none found
  */
 
-int sqrt_fun(int n,int sq)
+int sqrt_fun(int n, int sq)
 {
 	if (n == sq * sq)
 	{
@@ -31,7 +31,7 @@ int sqrt_fun(int n,int sq)
 	}
 	else if (sq < n)
 	{
-		return sqrt_fun(n, ++sq);
+		return (sqrt_fun(n, ++sq));
 	}
 	else
 	{
