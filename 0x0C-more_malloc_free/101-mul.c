@@ -1,109 +1,136 @@
-/**
- * @file 101-mul.c
- * @author muhabeid
- * @brief - program that multiplies two positive numbers.
- * @version 0.1
- * @date 2022-04-07
- * 
- * @copyright Copyright (c) 2022
- * 
- */
-#include <stdlib.h>
-#include <stdio.h>
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
- * is_digit - checks if a string contains a non-digit char
- * @s: string to be evaluated
- *
- * Return: 0 if a non-digit is found, 1 otherwise
+ * if_number - function to check the string for number
+ * @s: string being passed
+ * Return: 1 for number 0 for not
  */
-int is_digit(char *s)
+int if_number(char *s)
 {
-	int i = 0;
+int i;
 
-	while (s[i])
-	{
-		if (s[i] < '0' || s[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+for (i = 0; s[i] != '\0'; i++)
+{
+
+if (s[i] < '0' || s[i] > '9')
+return (0);
+}
+
+return (1);
+}
+/**
+ * string_length - calculating string length
+ * @s: string to check
+ * Return: count
+ *
+ */
+unsigned int string_length(char *s)
+{
+int i;
+
+for (i = 0; s[i] != '\0'; i++)
+i++;
+
+return (i);
 }
 
 /**
- * _strlen - returns the length of a string
- * @s: string to evaluate
- *
- * Return: the length of the string
+ * print_string - function to print string
+ * @s: string to print
+ * Return: none
  */
-int _strlen(char *s)
+void print_string(char *s)
 {
-	int i = 0;
+while (*s == '\0')
+s++;
 
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
+if (*s == '\0')
+_putchar('0');
+
+while (*s == '0')
+s++;
+
+while (*s != '\0')
+{
+_putchar(*s);
+s++;
+}
+_putchar('\n');
 }
 
 /**
- * errors - handles errors for main
+ * _calloc - function for memory
+ * @nmemb: the number
+ * @size: the size
+ * Return: pointer to memory
  */
-void errors(void)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	printf("Error\n");
-	exit(98);
+char *s;
+unsigned int i;
+
+if (nmemb == 0 || size == 0)
+return (NULL);
+
+s = malloc(nmemb * size);
+
+if (s == 0)
+return (NULL);
+
+for (i = 0; i < (nmemb * size); i++)
+s[i] = 0;
+
+return (s);
 }
 
 /**
- * main - multiplies two positive numbers
- * @argc: number of arguments
- * @argv: array of arguments
- *
- * Return: always 0 (Success)
+ * main - function to multiply
+ * @argc: number of arguments passed
+ * @argv: argument variables
+ * Return: Always zero
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	char *s1, *s2;
-	int len1, len2, len, i, carry, digit1, digit2, *result, a = 0;
+char *n1, *n2, *multi_res;
+unsigned int l = 0, l1 = 0, l2 = 0, a, b, t = 0, c = 0, ten = 0;
+if (argc < 3)
+{
+print_string("Error");
+exit(98);
+}
+n1 = argv[1];
+n2 = argv[2];
+if (!(if_number(n1) && if_number(n2)))
+{
+print_string("Error");
+exit(98);
+}
+l = string_length(n1) + string_length(n2);
+multi_res = _calloc(l + 1, sizeof(char *));
+if (multi_res == 0)
+{
+print_string("Error");
+exit(98);
+}
+for (a = 0; a < l1; a++, ten++)
+{
 
-	s1 = argv[1], s2 = argv[2];
-	if (argc != 3 || !is_digit(s1) || !is_digit(s2))
-		errors();
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
-	len = len1 + len2 + 1;
-	result = malloc(sizeof(int) * len);
-	if (!result)
-		return (1);
-	for (i = 0; i <= len1 + len2; i++)
-		result[i] = 0;
-	for (len1 = len1 - 1; len1 >= 0; len1--)
-	{
-		digit1 = s1[len1] - '0';
-		carry = 0;
-		for (len2 = _strlen(s2) - 1; len2 >= 0; len2--)
-		{
-			digit2 = s2[len2] - '0';
-			carry += result[len1 + len2 + 1] + (digit1 * digit2);
-			result[len1 + len2 + 1] = carry % 10;
-			carry /= 10;
-		}
-		if (carry > 0)
-			result[len1 + len2 + 1] += carry;
-	}
-	for (i = 0; i < len - 1; i++)
-	{
-		if (result[i])
-			a = 1;
-		if (a)
-			_putchar(result[i] + '0');
-	}
-	if (!a)
-		_putchar('0');
-	_putchar('\n');
-	free(result);
-	return (0);
+for (c = 0, b = 0; b < l2; b++)
+{
+t = (n1[l1 - a - 1] - '0') * (n2[l2 - b - 1] - '0') + c;
+
+if (multi_res[l - b - ten - 1] > 0)
+t = t + multi_res[l - b - ten - 1] - '0';
+multi_res[l - b - ten - 1] = t % 10 + '0';
+c = t / 10;
+}
+
+multi_res[l - b - ten - 1] += c + '0';
+}
+
+print_string(multi_res);
+free(multi_res);
+return (0);
 }
