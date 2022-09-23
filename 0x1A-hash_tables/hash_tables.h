@@ -1,6 +1,10 @@
 #ifndef _HASH_TABLES_
 #define _HASH_TABLES_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 /* structs given for this task */
 
 /**
